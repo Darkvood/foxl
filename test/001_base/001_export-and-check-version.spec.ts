@@ -6,15 +6,15 @@ import {
 import { FoxlClient } from "../../src/client";
 import { FoxlServer } from "../../src/server";
 
-describe(`The library is exported and have "verion" field`, () => {
-  test("The library is exported", () => {
+describe(`The library is exported and has "verion" field`, () => {
+  test(`"FOXLDB_VERSION" available`, () => {
     expect(FOXLDB_VERSION).toBeTruthy();
   });
-  test(`Client instanceof "FoxlClient"`, () => {
+  test(`Exported client instance of "FoxlClient"`, () => {
     const client = new Client();
     expect(client).toBeInstanceOf(FoxlClient);
   });
-  test(`Server instanceof "FoxlServer"`, () => {
+  test(`Exported server instance of "FoxlServer"`, () => {
     const server = new Server();
     expect(server).toBeInstanceOf(FoxlServer);
   });
