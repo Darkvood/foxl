@@ -1,6 +1,9 @@
 # dist
 dist
 
+# test 
+coverage
+
 # Logs
 logs
 *.log
