@@ -1,0 +1,27 @@
+{
+  "name": "foxl-db",
+  "version": "0.0.1",
+  "description": "Simple NoSQL storage",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "cross-env NODE_ENV=production webpack --hide-modules",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Darkvood/foxl-db.git"
+  },
+  "author": "Danil Katuhin <the.darkvood@mail.ru>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Darkvood/foxl-db/issues"
+  },
+  "homepage": "https://github.com/Darkvood/foxl-db#readme",
+  "devDependencies": {
+    "cross-env": "^6.0.3",
+    "ts-loader": "^6.2.1",
+    "typescript": "^3.7.2",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10"
+  }
+}
