@@ -1,3 +1,4 @@
+const webpack = require("webpack");
 const resolve = require("path").resolve;
 
 const mode = process.env.NODE_ENV;
@@ -21,5 +22,10 @@ module.exports = {
         use: ["ts-loader"]
       }
     ]
-  }
+  },
+  plugins: [
+    new webpack.DefinePlugin({
+      FOXL_VERSION: "1.2"
+    })
+  ]
 };

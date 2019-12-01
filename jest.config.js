@@ -6,5 +6,8 @@ module.exports = {
   testRegex: "(/test/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
   transform: {
     "^.+\\.tsx?$": "ts-jest"
+  },
+  globals: {
+    FOXL_VERSION: true
   }
 };

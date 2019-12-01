@@ -6,8 +6,8 @@ import {
 import { FoxlClient } from "../../src/client";
 import { FoxlServer } from "../../src/server";
 
-describe(`The library is exported and has "verion" field`, () => {
-  test(`"FOXLDB_VERSION" available`, () => {
+describe(`The library is exported`, () => {
+  test(`"FOXLDB_VERSION" is available`, () => {
     expect(FOXLDB_VERSION).toBeTruthy();
   });
   test(`Exported client instance of "FoxlClient"`, () => {

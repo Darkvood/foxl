@@ -1,6 +1,4 @@
-import pkg from "../package.json";
+export { FoxlClient } from "./client";
+export { FoxlServer } from "./server";
 
-export { FoxlClient, IFoxlClient } from "./client";
-export { FoxlServer, IFoxlServer } from "./server";
-
-export const FOXLDB_VERSION: string = pkg.version;
+export const FOXLDB_VERSION = FOXL_VERSION;
