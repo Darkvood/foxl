@@ -5,6 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack --hide-modules",
+    "lint": "eslint src/**",
     "test": "jest",
     "coverage": "jest --coverage"
   },
@@ -20,7 +21,11 @@
   "homepage": "https://github.com/Darkvood/foxl-db#readme",
   "devDependencies": {
     "@types/jest": "^24.0.23",
+    "@typescript-eslint/eslint-plugin": "^2.9.0",
+    "@typescript-eslint/parser": "^2.9.0",
     "cross-env": "^6.0.3",
+    "eslint": "^6.7.2",
+    "eslint-plugin-only-warn": "^1.0.1",
     "jest": "^24.9.0",
     "ts-jest": "^24.2.0",
     "ts-loader": "^6.2.1",
