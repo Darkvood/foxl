@@ -1,8 +1,4 @@
-import {
-  FoxlClient as Client,
-  FoxlServer as Server,
-  FOXLDB_VERSION
-} from "../../src";
+import { FoxlClient as Client, FoxlServer as Server, FOXLDB_VERSION } from "../../src";
 import { FoxlClient } from "../../src/client";
 import { FoxlServer } from "../../src/server";
 
@@ -15,7 +11,7 @@ describe(`The library is exported`, () => {
     expect(client).toBeInstanceOf(FoxlClient);
   });
   test(`Exported server instance of "FoxlServer"`, () => {
-    const server = new Server();
+    const server = new Server({ path: "./" });
     expect(server).toBeInstanceOf(FoxlServer);
   });
 });
