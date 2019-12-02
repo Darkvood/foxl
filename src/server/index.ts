@@ -19,6 +19,10 @@ export class FoxlServer implements IFoxlServer {
     this.app = new ServerCore(params);
   }
 
+  async run(): Promise<void> {
+    return await this.app.run();
+  }
+
   async query<T>(query: string): Promise<T> {
     return await this.app.query(query);
   }

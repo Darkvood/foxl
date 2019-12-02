@@ -13,6 +13,10 @@ export class ServerCore {
     this.$fs = new FileStorage(params.path);
   }
 
+  async run() {
+    await this.$fs.init();
+  }
+
   async query<T>(query: string): Promise<T> {
     const parsed = parseQuery(query);
 

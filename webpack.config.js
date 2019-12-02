@@ -18,7 +18,7 @@ let config = {
     libraryTarget: "umd"
   },
   resolve: {
-    extensions: [".ts"]
+    extensions: [".ts", ".js"]
   },
   module: {
     rules: [
