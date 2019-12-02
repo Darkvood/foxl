@@ -2,7 +2,7 @@
   "name": "foxl-db",
   "version": "0.0.3",
   "description": "Simple NoSQL storage",
-  "main": "dist/index.js",
+  "main": "dist/main.js",
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack --hide-modules",
     "start": "cross-env NODE_ENV=development webpack --watch",
@@ -35,5 +35,12 @@
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10",
     "webpack-merge": "^4.2.2"
-  }
+  },
+  "keywords": [
+    "database",
+    "storage",
+    "foxldb",
+    "foxl",
+    "db"
+  ]
 }
