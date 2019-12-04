@@ -9,14 +9,14 @@ export class FileProvider implements IStorageProvider {
     this.dataFile = `${this.path}/foxldb.json`;
   }
 
-  async init() {
-    const isReady = await fse.pathExists(this.dataFile);
+  init() {
+    const isReady = fse.pathExistsSync(this.dataFile);
 
     if (isReady) {
-      this.state = await fse.readJson(this.dataFile);
+      this.state = fse.readJsonSync(this.dataFile);
     } else {
-      await fse.remove(this.dataFile);
-      await fse.outputJSON(this.dataFile, this.seed);
+      fse.removeSync(this.dataFile);
+      fse.outputJsonSync(this.dataFile, this.seed);
 
       this.state = this.seed as IState;
     }
@@ -24,11 +24,11 @@ export class FileProvider implements IStorageProvider {
     this.seed = null;
   }
 
-  async get<T>(key: string): Promise<T | undefined> {
+  get<T>(key: string): T | undefined {
     return this.state[key];
   }
 
-  async set(key: string, value: any): Promise<boolean> {
+  set(key: string, value: any): boolean {
     if (this.state[key]) {
       this.state[key] = value;
       return true;

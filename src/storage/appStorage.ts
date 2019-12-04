@@ -1,9 +1,9 @@
 import { FileProvider } from "./fileProvider";
 
 export interface IStorage {
-  init(): Promise<void>;
-  get<T>(key: string): Promise<T | undefined>;
-  set(key: string, value: any): Promise<boolean>;
+  init(): void;
+  get<T>(key: string): T | undefined;
+  set(key: string, value: any): boolean;
 }
 
 export interface IStorageProvider extends IStorage {}
@@ -27,20 +27,20 @@ export class AppStorage implements IStorage {
     this.init();
   }
 
-  async init(): Promise<void> {
+  init(): void {
     try {
-      await this.$provider.init();
+      this.$provider.init();
     } catch (e) {
       console.error("[FoxlFileStorage] Can't init storage");
       console.error(e);
     }
   }
 
-  async get<T>(key: string): Promise<T | undefined> {
-    return await this.$provider.get<T>(key);
+  get<T>(key: string): T | undefined {
+    return this.$provider.get<T>(key);
   }
 
-  async set(key: string, value: any): Promise<boolean> {
-    return await this.$provider.set(key, value);
+  set(key: string, value: any): boolean {
+    return this.$provider.set(key, value);
   }
 }
