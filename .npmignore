@@ -5,6 +5,7 @@ src/
 test/
 types/
 jest.config.js
-LICENSE
+.eslintrc
+.prettierrc
 tsconfig.json
 webpack.config.js

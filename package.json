@@ -1,6 +1,6 @@
 {
   "name": "foxl-db",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "Simple NoSQL storage",
   "main": "dist/main.js",
   "scripts": {
@@ -20,6 +20,11 @@
     "url": "https://github.com/Darkvood/foxl-db/issues"
   },
   "homepage": "https://github.com/Darkvood/foxl-db#readme",
+  "dependencies": {
+    "fs-extra": "^8.1.0",
+    "lodash.debounce": "^4.0.8",
+    "set-value": "^3.0.1"
+  },
   "devDependencies": {
     "@types/fs-extra": "^8.0.1",
     "@types/jest": "^24.0.23",
@@ -30,11 +35,8 @@
     "cross-env": "^6.0.3",
     "eslint": "^6.7.2",
     "eslint-plugin-only-warn": "^1.0.1",
-    "fs-extra": "^8.1.0",
     "jest": "^24.9.0",
-    "lodash.debounce": "^4.0.8",
     "nodemon-webpack-plugin": "^4.2.1",
-    "set-value": "^3.0.1",
     "ts-jest": "^24.2.0",
     "ts-loader": "^6.2.1",
     "typescript": "^3.7.2",
