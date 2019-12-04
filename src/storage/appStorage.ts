@@ -1,4 +1,5 @@
 import { FileProvider } from "./fileProvider";
+import debounce from "lodash.debounce";
 
 export interface IStorage {
   init(): void;
@@ -6,7 +7,9 @@ export interface IStorage {
   set(path: string, value: any): boolean;
 }
 
-export interface IStorageProvider extends IStorage {}
+export interface IStorageProvider extends IStorage {
+  save(): void;
+}
 
 export interface StorageParams {
   path: string;
@@ -20,9 +23,12 @@ export interface IState {
 
 export class AppStorage implements IStorage {
   private $provider: IStorageProvider;
+  debouncedSave: () => void;
 
-  constructor(params: StorageParams) {
+  constructor(private params: StorageParams) {
     this.$provider = new FileProvider(params.path, params.seed);
+
+    this.debouncedSave = debounce(() => this.save(), 2000);
 
     this.init();
   }
@@ -31,7 +37,7 @@ export class AppStorage implements IStorage {
     try {
       this.$provider.init();
     } catch (e) {
-      console.error("[FoxlFileStorage] Can't init storage");
+      console.error("[FoxlDB] Can't init storage");
       console.error(e);
     }
   }
@@ -41,6 +47,21 @@ export class AppStorage implements IStorage {
   }
 
   set(key: string, value: any): boolean {
-    return this.$provider.set(key, value);
+    const result = this.$provider.set(key, value);
+
+    if (this.params.save === true) {
+      this.debouncedSave();
+    }
+
+    return result;
+  }
+
+  private save() {
+    try {
+      this.$provider.save();
+    } catch (e) {
+      console.error("[FoxlDB] Can't init storage");
+      console.error(e);
+    }
   }
 }

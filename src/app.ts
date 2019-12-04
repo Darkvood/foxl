@@ -1,7 +1,7 @@
 import { AppParams, FoxlDBCore } from "./core/core";
 
 export class FoxlDB {
-  $app: FoxlDBCore;
+  private $app: FoxlDBCore;
 
   constructor({ path, save = true, seed = {} }: AppParams) {
     if (!path && typeof path !== "string") {

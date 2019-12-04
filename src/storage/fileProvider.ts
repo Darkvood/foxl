@@ -35,4 +35,8 @@ export class FileProvider implements IStorageProvider {
     }
     return false;
   }
+
+  save(): void {
+    fse.outputJsonSync(this.dataFile, this.state);
+  }
 }
