@@ -4,7 +4,7 @@ import debounce from "lodash.debounce";
 export interface IStorage {
   init(): void;
   get<T>(path: string): T | undefined;
-  set(path: string, value: any): boolean;
+  set<T>(path: string, value: T): boolean;
 }
 
 export interface IStorageProvider extends IStorage {
@@ -46,7 +46,7 @@ export class AppStorage implements IStorage {
     return this.$provider.get<T>(key);
   }
 
-  set(key: string, value: any): boolean {
+  set<T>(key: string, value: T): boolean {
     const result = this.$provider.set(key, value);
 
     if (this.params.save === true) {

@@ -23,7 +23,7 @@ export class FoxlDB {
   get<T>(key: string): T | undefined {
     return this.$app.$store.get(key);
   }
-  set(key: string, value: any): boolean {
+  set<T>(key: string, value: T): boolean {
     return this.$app.$store.set(key, value);
   }
 }

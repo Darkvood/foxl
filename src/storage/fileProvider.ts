@@ -29,7 +29,7 @@ export class FileProvider implements IStorageProvider {
     return safeGet(this.state, path);
   }
 
-  set(path: string, value: any): boolean {
+  set<T>(path: string, value: T): boolean {
     if (parentIsMutable(this.state, path)) {
       return commitChanges(this.state, path, value);
     }
