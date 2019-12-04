@@ -4,6 +4,9 @@ dist
 # test 
 coverage
 
+# dev dir 
+dev
+
 # Logs
 logs
 *.log
