@@ -2,8 +2,8 @@ import { FileProvider } from "./fileProvider";
 
 export interface IStorage {
   init(): void;
-  get<T>(key: string): T | undefined;
-  set(key: string, value: any): boolean;
+  get<T>(path: string): T | undefined;
+  set(path: string, value: any): boolean;
 }
 
 export interface IStorageProvider extends IStorage {}
