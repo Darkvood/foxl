@@ -1,5 +1,5 @@
 import { safeGet, parentIsMutable, parseNextState, commitChanges } from "../../core/utils";
-import { IState } from "../appStorage";
+import { IState, FoxlRowReducer } from "../appStorage";
 
 export class BaseProvider {
   protected state: IState = {};
@@ -17,6 +17,15 @@ export class BaseProvider {
     return false;
   }
 
+  update<T>(path: string, reducer: FoxlRowReducer<T>): boolean {
+    if (!parentIsMutable(this.state, path)) return false;
+
+    const currentValue = this.get(path);
+    const nextValue = reducer(currentValue as T);
+
+    return this.set(path, nextValue);
+  }
+
   getState<T>(): T {
     return this.state as T;
   }
@@ -29,14 +38,5 @@ export class BaseProvider {
     this.state = state as IState;
 
     return true;
-  }
-
-  update<T>(path: string, reducer: (el: T) => any): boolean {
-    if (!parentIsMutable(this.state, path)) return false;
-
-    const currentValue = this.get(path);
-    const nextValue = reducer(currentValue as T);
-
-    return this.set(path, nextValue);
   }
 }
