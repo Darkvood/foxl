@@ -1,8 +1,8 @@
-import { AppParams, FoxlDBCore } from "./core/core";
 import { isObject } from "./core/utils";
+import { AppStorage, IStorage } from "./storage/appStorage";
 
 export class FoxlDB {
-  private $app: FoxlDBCore;
+  $store: IStorage;
 
   constructor({ path, save = true, seed = {} }: AppParams) {
     if (!path && typeof path !== "string") {
@@ -17,22 +17,22 @@ export class FoxlDB {
       throw new Error(`[FoxlDB] The params "seed" must be plain object`);
     }
 
-    this.$app = new FoxlDBCore({ path, save, seed });
+    this.$store = new AppStorage({ path, save, seed });
   }
 
   get<T>(key: string): T | undefined {
-    return this.$app.$store.get(key);
+    return this.$store.get(key);
   }
 
   set<T>(key: string, value: T): boolean {
-    return this.$app.$store.set(key, value);
+    return this.$store.set(key, value);
   }
 
   getState<T>(): T {
-    return this.$app.$store.getState<T>();
+    return this.$store.getState<T>();
   }
 
   setState<T>(newState: T): boolean {
-    return this.$app.$store.setState<T>(newState);
+    return this.$store.setState<T>(newState);
   }
 }
