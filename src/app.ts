@@ -23,7 +23,16 @@ export class FoxlDB {
   get<T>(key: string): T | undefined {
     return this.$app.$store.get(key);
   }
+
   set<T>(key: string, value: T): boolean {
     return this.$app.$store.set(key, value);
+  }
+
+  getState<T>(): T {
+    return this.$app.$store.getState<T>();
+  }
+
+  setState<T>(newState: T): boolean {
+    return this.$app.$store.setState<T>(newState);
   }
 }

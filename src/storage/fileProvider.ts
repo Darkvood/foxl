@@ -1,6 +1,6 @@
 import fse from "fs-extra";
 import { IStorageProvider, IState } from "./appStorage";
-import { safeGet, parentIsMutable, commitChanges } from "../core/utils";
+import { safeGet, parentIsMutable, commitChanges, parseNextState } from "../core/utils";
 
 export class FileProvider implements IStorageProvider {
   private dataFile: string;
@@ -34,6 +34,20 @@ export class FileProvider implements IStorageProvider {
       return commitChanges(this.state, path, value);
     }
     return false;
+  }
+
+  getState<T>(): T {
+    return this.state as T;
+  }
+
+  setState<T>(newState: T) {
+    const state = parseNextState(newState);
+
+    if (!state) return false;
+
+    this.state = state as IState;
+
+    return true;
   }
 
   save(): void {

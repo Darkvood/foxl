@@ -37,3 +37,9 @@ export function commitChanges(state: any, path: string, value: any): boolean {
 
   return true;
 }
+
+export function parseNextState(newState: any) {
+  if (!isObject(newState)) return false;
+
+  return { ...newState };
+}

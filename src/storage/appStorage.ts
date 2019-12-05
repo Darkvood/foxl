@@ -5,6 +5,8 @@ export interface IStorage {
   init(): void;
   get<T>(path: string): T | undefined;
   set<T>(path: string, value: T): boolean;
+  getState<T>(): T;
+  setState<T>(newState: T): boolean;
 }
 
 export interface IStorageProvider extends IStorage {
@@ -48,6 +50,20 @@ export class AppStorage implements IStorage {
 
   set<T>(key: string, value: T): boolean {
     const result = this.$provider.set(key, value);
+
+    if (this.params.save === true) {
+      this.debouncedSave();
+    }
+
+    return result;
+  }
+
+  getState<T>(): T {
+    return this.$provider.getState<T>();
+  }
+
+  setState<T>(newState: T): boolean {
+    const result = this.$provider.setState<T>(newState);
 
     if (this.params.save === true) {
       this.debouncedSave();
