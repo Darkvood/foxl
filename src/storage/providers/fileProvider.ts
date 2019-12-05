@@ -1,12 +1,13 @@
 import fse from "fs-extra";
-import { IStorageProvider, IState } from "./appStorage";
-import { safeGet, parentIsMutable, commitChanges, parseNextState } from "../core/utils";
+import { IStorageProvider, IState } from "../appStorage";
+import { safeGet, parentIsMutable, commitChanges } from "../../core/utils";
+import { BaseProvider } from "./baseProvider";
 
-export class FileProvider implements IStorageProvider {
+export class FileProvider extends BaseProvider implements IStorageProvider {
   private dataFile: string;
-  private state: IState = {};
 
   constructor(private path: string, private seed: any) {
+    super();
     this.dataFile = `${this.path}/foxldb.json`;
   }
 
@@ -34,20 +35,6 @@ export class FileProvider implements IStorageProvider {
       return commitChanges(this.state, path, value);
     }
     return false;
-  }
-
-  getState<T>(): T {
-    return this.state as T;
-  }
-
-  setState<T>(newState: T) {
-    const state = parseNextState(newState);
-
-    if (!state) return false;
-
-    this.state = state as IState;
-
-    return true;
   }
 
   save(): void {

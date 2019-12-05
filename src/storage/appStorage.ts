@@ -1,4 +1,4 @@
-import { FileProvider } from "./fileProvider";
+import { FileProvider } from "./providers/fileProvider";
 import debounce from "lodash.debounce";
 
 export interface IStorage {
