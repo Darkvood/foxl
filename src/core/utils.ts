@@ -33,6 +33,14 @@ export function parentIsMutable(obj: any, path: string): boolean {
 export function commitChanges(state: any, path: string, value: any): boolean {
   if (!path) return false;
 
+  if (Array.isArray(value)) {
+    value = [...value];
+  }
+
+  if (isObject(value)) {
+    value = { ...value };
+  }
+
   setValue(state, path, value);
 
   return true;
