@@ -1,6 +1,5 @@
 import fse from "fs-extra";
 import { IStorageProvider, IState } from "../appStorage";
-import { safeGet, parentIsMutable, commitChanges } from "../../core/utils";
 import { BaseProvider } from "./baseProvider";
 
 export class FileProvider extends BaseProvider implements IStorageProvider {
@@ -24,17 +23,6 @@ export class FileProvider extends BaseProvider implements IStorageProvider {
     }
 
     this.seed = null;
-  }
-
-  get<T>(path: string): T | undefined {
-    return safeGet(this.state, path);
-  }
-
-  set<T>(path: string, value: T): boolean {
-    if (parentIsMutable(this.state, path)) {
-      return commitChanges(this.state, path, value);
-    }
-    return false;
   }
 
   save(): void {

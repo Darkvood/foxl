@@ -28,6 +28,10 @@ export class FoxlDB {
     return this.$store.set(key, value);
   }
 
+  update<T>(path: string, reducer: (el: T) => any): boolean {
+    return this.$store.update<T>(path, reducer);
+  }
+
   getState<T>(): T {
     return this.$store.getState<T>();
   }
