@@ -10,7 +10,7 @@ export class FileProvider extends BaseProvider implements IStorageProvider {
     this.dataFile = `${this.path}/foxldb.json`;
   }
 
-  init() {
+  init(): void {
     const isReady = fse.pathExistsSync(this.dataFile);
 
     if (isReady) {

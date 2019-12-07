@@ -1,10 +1,12 @@
 import { isObject } from "./core/utils";
 import { AppStorage, IStorage, FoxlModel, FoxlModelReducer } from "./storage/appStorage";
+import { ProviderFactory } from "./storage/providers/baseProvider";
 
 export class FoxlDB {
   $store: IStorage;
+  version: string = FOXL_VERSION;
 
-  constructor({ path, save = true, seed = {} }: AppParams) {
+  constructor(provider: ProviderFactory, { path, save = true, seed = {} }: AppParams) {
     if (!path && typeof path !== "string") {
       throw new Error(`[FoxlDB] The params "path" must be non-empty string`);
     }
@@ -17,7 +19,7 @@ export class FoxlDB {
       throw new Error(`[FoxlDB] The params "seed" must be plain object`);
     }
 
-    this.$store = new AppStorage({ path, save, seed });
+    this.$store = new AppStorage(provider, { path, save, seed });
   }
 
   get<T>(key: string): T | undefined {

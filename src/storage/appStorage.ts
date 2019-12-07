@@ -1,5 +1,5 @@
-import { FileProvider } from "./providers/fileProvider";
 import debounce from "lodash.debounce";
+import { BaseProvider, ProviderFactory } from "./providers/baseProvider";
 
 export interface IStorage {
   init(): void;
@@ -34,11 +34,11 @@ export interface IState {
 }
 
 export class AppStorage implements IStorage {
-  private $provider: IStorageProvider;
+  $provider: IStorageProvider;
   debouncedSave: () => void;
 
-  constructor(private params: StorageParams) {
-    this.$provider = new FileProvider(params.path, params.seed);
+  constructor(provider: ProviderFactory, private params: StorageParams) {
+    this.$provider = BaseProvider.factory(provider, params.path, params.seed);
 
     this.debouncedSave = debounce(() => this.save(), 2000);
 

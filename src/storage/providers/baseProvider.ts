@@ -1,10 +1,17 @@
 import { safeGet, parentIsMutable, parseNextState, commitChanges } from "../../core/utils";
-import { IState, FoxlModelReducer } from "../appStorage";
+import { IState, FoxlModelReducer, IStorageProvider } from "../appStorage";
 
-export class BaseProvider {
+export interface ProviderFactory {
+  new (path: string, seed: any): IStorageProvider;
+}
+
+export abstract class BaseProvider implements IStorageProvider {
   protected state: IState = {};
 
   constructor() {}
+
+  abstract init(): void;
+  abstract save(): void;
 
   get<T>(path: string): T | undefined {
     return safeGet(this.state, path);
@@ -38,5 +45,9 @@ export class BaseProvider {
     this.state = state as IState;
 
     return true;
+  }
+
+  static factory(Provider: ProviderFactory, path: string, seed: any): IStorageProvider {
+    return new Provider(path, seed);
   }
 }

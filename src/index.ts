@@ -1,3 +1,6 @@
-export { FoxlDB } from "./app";
+import { FoxlDB } from "./app";
+import { FileProvider } from "./storage/providers/fileProvider";
 
-export const FOXLDB_VERSION = FOXL_VERSION;
+export function createStorage(params: AppParams) {
+  return new FoxlDB(FileProvider, params);
+}
