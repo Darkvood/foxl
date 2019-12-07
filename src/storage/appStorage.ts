@@ -34,13 +34,7 @@ export class AppStorage implements IStorage {
   }
 
   set<T>(key: string, value: T): boolean {
-    const status = this.$provider.set(key, value);
-
-    if (this.params.save === true) {
-      this.debouncedSave();
-    }
-
-    return status;
+    return this.$provider.set(key, value);
   }
 
   for<T>(path: string): FoxlModel<T> {
@@ -54,13 +48,7 @@ export class AppStorage implements IStorage {
   }
 
   update<T>(path: string, reducer: FoxlModelReducer<T>): boolean {
-    const status = this.$provider.update<T>(path, reducer);
-
-    if (this.params.save === true) {
-      this.debouncedSave();
-    }
-
-    return status;
+    return this.$provider.update<T>(path, reducer);
   }
 
   getState<T>(): T {
@@ -68,16 +56,12 @@ export class AppStorage implements IStorage {
   }
 
   setState<T>(newState: T): boolean {
-    const status = this.$provider.setState<T>(newState);
-
-    if (this.params.save === true) {
-      this.debouncedSave();
-    }
-
-    return status;
+    return this.$provider.setState<T>(newState);
   }
 
   private save() {
+    if (this.params.save !== true) return;
+
     try {
       this.$provider.save();
     } catch (e) {
