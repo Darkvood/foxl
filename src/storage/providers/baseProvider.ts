@@ -52,7 +52,7 @@ export abstract class BaseProvider implements IStorageProvider {
     if (!state) return false;
 
     this.state = state as IState;
-
+    // TODO: Clear watchers
     return true;
   }
 
