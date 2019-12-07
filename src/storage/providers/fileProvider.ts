@@ -1,6 +1,6 @@
 import fse from "fs-extra";
-import { IStorageProvider, IState } from "../appStorage";
 import { BaseProvider } from "./baseProvider";
+import { IStorageProvider, IState } from "../../../types/storage";
 
 export class FileProvider extends BaseProvider implements IStorageProvider {
   private dataFile: string;

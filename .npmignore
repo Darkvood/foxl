@@ -3,7 +3,6 @@ dev/
 node_modules/
 src/
 test/
-types/
 jest.config.js
 .eslintrc
 .prettierrc

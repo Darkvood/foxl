@@ -1,9 +1,10 @@
 import { isObject } from "./core/utils";
-import { AppStorage, IStorage, FoxlModel, FoxlModelReducer } from "./storage/appStorage";
-import { ProviderFactory } from "./storage/providers/baseProvider";
+import { AppStorage } from "./storage/appStorage";
+import { FoxlDBInstance, AppParams } from "../types/app";
+import { IStorage, ProviderFactory, FoxlModel, FoxlModelReducer } from "../types/storage";
 
-export class FoxlDB {
-  $store: IStorage;
+export class FoxlDB implements FoxlDBInstance {
+  private $store: IStorage;
   version: string = FOXL_VERSION;
 
   constructor(provider: ProviderFactory, { path, save = true, seed = {} }: AppParams) {
@@ -23,11 +24,11 @@ export class FoxlDB {
   }
 
   get<T>(key: string): T | undefined {
-    return this.$store.get(key);
+    return this.$store.get<T>(key);
   }
 
   set<T>(key: string, value: T): boolean {
-    return this.$store.set(key, value);
+    return this.$store.set<T>(key, value);
   }
 
   for<T>(path: string): FoxlModel<T> {

@@ -1,9 +1,5 @@
 import { safeGet, parentIsMutable, parseNextState, commitChanges } from "../../core/utils";
-import { IState, FoxlModelReducer, IStorageProvider } from "../appStorage";
-
-export interface ProviderFactory {
-  new (path: string, seed: any): IStorageProvider;
-}
+import { IStorageProvider, IState, FoxlModelReducer, ProviderFactory } from "../../../types/storage";
 
 export abstract class BaseProvider implements IStorageProvider {
   protected state: IState = {};
