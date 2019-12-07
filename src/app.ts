@@ -1,5 +1,5 @@
 import { isObject } from "./core/utils";
-import { AppStorage, IStorage, FoxlRow, FoxlRowReducer } from "./storage/appStorage";
+import { AppStorage, IStorage, FoxlModel, FoxlModelReducer } from "./storage/appStorage";
 
 export class FoxlDB {
   $store: IStorage;
@@ -28,11 +28,11 @@ export class FoxlDB {
     return this.$store.set(key, value);
   }
 
-  for<T>(path: string): FoxlRow<T> {
+  for<T>(path: string): FoxlModel<T> {
     return this.$store.for<T>(path);
   }
 
-  update<T>(path: string, reducer: FoxlRowReducer<T>): boolean {
+  update<T>(path: string, reducer: FoxlModelReducer<T>): boolean {
     return this.$store.update<T>(path, reducer);
   }
 

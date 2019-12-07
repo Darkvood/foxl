@@ -1,14 +1,12 @@
 import { FileProvider } from "./providers/fileProvider";
 import debounce from "lodash.debounce";
 
-export type FoxlRowReducer<T> = (el: T | undefined) => any;
-
 export interface IStorage {
   init(): void;
   get<T>(path: string): T | undefined;
   set<T>(path: string, value: T): boolean;
-  for<T>(path: string): FoxlRow<T>;
-  update<T>(path: string, reducer: FoxlRowReducer<T>): boolean;
+  for<T>(path: string): FoxlModel<T>;
+  update<T>(path: string, reducer: FoxlModelReducer<T>): boolean;
   getState<T>(): T;
   setState<T>(newState: T): boolean;
 }
@@ -23,10 +21,12 @@ export interface StorageParams {
   seed: any;
 }
 
-export interface FoxlRow<T> {
+export type FoxlModelReducer<T> = (el: T | undefined) => any;
+
+export interface FoxlModel<T> {
   get(): T | undefined;
   set(value: T): boolean;
-  update(reducer: FoxlRowReducer<T>): boolean;
+  update(reducer: FoxlModelReducer<T>): boolean;
 }
 
 export interface IState {
@@ -68,17 +68,17 @@ export class AppStorage implements IStorage {
     return status;
   }
 
-  for<T>(path: string): FoxlRow<T> {
-    let $f: FoxlRow<T> = {
+  for<T>(path: string): FoxlModel<T> {
+    let $f: FoxlModel<T> = {
       get: () => this.get(path),
       set: (value: T) => this.set(path, value),
-      update: (reducer: FoxlRowReducer<T>) => this.update(path, reducer)
+      update: (reducer: FoxlModelReducer<T>) => this.update(path, reducer)
     };
 
     return $f;
   }
 
-  update<T>(path: string, reducer: FoxlRowReducer<T>): boolean {
+  update<T>(path: string, reducer: FoxlModelReducer<T>): boolean {
     const status = this.$provider.update<T>(path, reducer);
 
     if (this.params.save === true) {
