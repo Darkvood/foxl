@@ -1,6 +1,6 @@
 {
   "name": "foxl-db",
-  "version": "0.4.2",
+  "version": "0.5.0",
   "description": "Simple NoSQL storage",
   "main": "dist/main.js",
   "scripts": {
