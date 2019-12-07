@@ -6,10 +6,7 @@ export interface AppParams {
   seed?: any;
 }
 
-export interface ParsedAppParams extends AppParams {
-  save: boolean;
-  seed: any;
-}
+export interface ParsedAppParams extends Required<AppParams> {}
 
 export interface FoxlDBInstance {
   version: string;

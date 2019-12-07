@@ -25,8 +25,7 @@ export class AppStorage implements IStorage {
     try {
       this.$provider.init();
     } catch (e) {
-      console.error("[FoxlDB] Can't init storage");
-      console.error(e);
+      console.error("[FoxlDB] Can't init storage", e);
     }
   }
 
@@ -82,8 +81,7 @@ export class AppStorage implements IStorage {
     try {
       this.$provider.save();
     } catch (e) {
-      console.error("[FoxlDB] Can't init storage");
-      console.error(e);
+      console.error("[FoxlDB] Can't init storage", e);
     }
   }
 }

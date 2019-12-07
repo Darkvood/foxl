@@ -1,26 +1,18 @@
+import { ParsedAppParams, FoxlDBInstance } from "./app";
+
 export interface ProviderFactory {
   new (path: string, seed: any): IStorageProvider;
 }
 
-export interface IStorage {
+export interface IStorage extends Omit<FoxlDBInstance, "version"> {
   init(): void;
-  get<T>(path: string): T | undefined;
-  set<T>(path: string, value: T): boolean;
-  for<T>(path: string): FoxlModel<T>;
-  update<T>(path: string, reducer: FoxlModelReducer<T>): boolean;
-  getState<T>(): T;
-  setState<T>(newState: T): boolean;
 }
 
 export interface IStorageProvider extends Omit<IStorage, "for"> {
   save(): void;
 }
 
-export interface StorageParams {
-  path: string;
-  save: boolean;
-  seed: any;
-}
+export interface StorageParams extends ParsedAppParams {}
 
 export type FoxlModelReducer<T> = (el: T | undefined) => any;
 
@@ -30,6 +22,6 @@ export interface FoxlModel<T> {
   update(reducer: FoxlModelReducer<T>): boolean;
 }
 
-interface IState {
+export interface IState {
   [key: string]: any;
 }
