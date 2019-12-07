@@ -1,4 +1,4 @@
-import { isObject } from "./core/utils";
+import { isObject } from "./libs/utils";
 import { AppStorage } from "./storage/appStorage";
 import { FoxlDBInstance, AppParams } from "../types/app";
 import { IStorage, ProviderFactory, FoxlModel, FoxlModelReducer, FoxlWatchHandler } from "../types/storage";

@@ -1,22 +1,6 @@
 import setValue from "set-value";
 import { ChangeEmmiter } from "../../types/storage";
-
-const noDefault = Symbol("safeGet.def");
-
-export function isObject(value: any) {
-  return value !== null && typeof value === "object" && !Array.isArray(value);
-}
-
-export function safeGet(obj: any, path: string, defaultValue = noDefault) {
-  const result = path.split(".").reduce((acc, curr) => (acc && typeof acc === "object" ? acc[curr] : null), obj);
-  const hasDefault = defaultValue !== noDefault;
-
-  if (result === undefined && hasDefault) {
-    return defaultValue;
-  } else {
-    return result;
-  }
-}
+import { safeGet, isObject } from "./utils";
 
 export function parentIsMutable(obj: any, path: string): boolean {
   const splitedPath = path.split(".");
@@ -36,9 +20,7 @@ export function commitChanges(state: any, path: string, value: any, changeEmitte
 
   if (Array.isArray(value)) {
     value = [...value];
-  }
-
-  if (isObject(value)) {
+  } else if (isObject(value)) {
     value = { ...value };
   }
 

@@ -1,4 +1,5 @@
-import { safeGet, parentIsMutable, parseNextState, commitChanges } from "../../core/utils";
+import { parentIsMutable, parseNextState, commitChanges } from "../../libs/core";
+import { safeGet } from "../../libs/utils";
 import {
   IStorageProvider,
   IState,
@@ -45,7 +46,7 @@ export abstract class BaseProvider implements IStorageProvider {
     return this.state as T;
   }
 
-  setState<T>(newState: T) {
+  setState<T>(newState: T): boolean {
     const state = parseNextState(newState);
 
     if (!state) return false;
