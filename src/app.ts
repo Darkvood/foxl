@@ -1,7 +1,7 @@
 import { isObject } from "./core/utils";
 import { AppStorage } from "./storage/appStorage";
 import { FoxlDBInstance, AppParams } from "../types/app";
-import { IStorage, ProviderFactory, FoxlModel, FoxlModelReducer } from "../types/storage";
+import { IStorage, ProviderFactory, FoxlModel, FoxlModelReducer, FoxlWatchHandler } from "../types/storage";
 
 export class FoxlDB implements FoxlDBInstance {
   private $store: IStorage;
@@ -29,6 +29,10 @@ export class FoxlDB implements FoxlDBInstance {
 
   set<T>(key: string, value: T): boolean {
     return this.$store.set<T>(key, value);
+  }
+
+  watch(path: string, handler: FoxlWatchHandler): void {
+    return this.$store.watch(path, handler);
   }
 
   for<T>(path: string): FoxlModel<T> {

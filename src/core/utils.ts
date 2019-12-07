@@ -1,4 +1,5 @@
 import setValue from "set-value";
+import { ChangeEmmiter } from "../../types/storage";
 
 const noDefault = Symbol("safeGet.def");
 
@@ -30,7 +31,7 @@ export function parentIsMutable(obj: any, path: string): boolean {
   return isObject(parent);
 }
 
-export function commitChanges(state: any, path: string, value: any): boolean {
+export function commitChanges(state: any, path: string, value: any, changeEmitter: ChangeEmmiter): boolean {
   if (!path) return false;
 
   if (Array.isArray(value)) {
@@ -41,7 +42,11 @@ export function commitChanges(state: any, path: string, value: any): boolean {
     value = { ...value };
   }
 
+  const prevValue = safeGet(state, path);
+
   setValue(state, path, value);
+
+  changeEmitter(path, value, prevValue);
 
   return true;
 }

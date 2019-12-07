@@ -6,7 +6,8 @@ import {
   StorageParams,
   ProviderFactory,
   FoxlModel,
-  FoxlModelReducer
+  FoxlModelReducer,
+  FoxlWatchHandler
 } from "../../types/storage";
 
 export class AppStorage implements IStorage {
@@ -34,21 +35,30 @@ export class AppStorage implements IStorage {
   }
 
   set<T>(key: string, value: T): boolean {
-    return this.$provider.set(key, value);
+    const status = this.$provider.set(key, value);
+    this.debouncedSave();
+    return status;
+  }
+
+  watch(path: string, handler: FoxlWatchHandler): void {
+    this.$provider.watch(path, handler);
   }
 
   for<T>(path: string): FoxlModel<T> {
     let $f: FoxlModel<T> = {
       get: () => this.get(path),
       set: (value: T) => this.set(path, value),
-      update: (reducer: FoxlModelReducer<T>) => this.update(path, reducer)
+      update: (reducer: FoxlModelReducer<T>) => this.update(path, reducer),
+      watch: (handler: FoxlWatchHandler) => this.watch(path, handler)
     };
 
     return $f;
   }
 
   update<T>(path: string, reducer: FoxlModelReducer<T>): boolean {
-    return this.$provider.update<T>(path, reducer);
+    const status = this.$provider.update<T>(path, reducer);
+    this.debouncedSave();
+    return status;
   }
 
   getState<T>(): T {
@@ -56,7 +66,9 @@ export class AppStorage implements IStorage {
   }
 
   setState<T>(newState: T): boolean {
-    return this.$provider.setState<T>(newState);
+    const status = this.$provider.setState<T>(newState);
+    this.debouncedSave();
+    return status;
   }
 
   private save() {
