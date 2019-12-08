@@ -7,6 +7,9 @@ coverage
 # dev dir 
 dev
 
+# test temp
+test/temp
+
 # Logs
 logs
 *.log
