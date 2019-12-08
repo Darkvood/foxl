@@ -14,5 +14,5 @@ export function initTest() {
 
 // clear test temp dir
 function clearTemp() {
-  return fse.remove(resolve(__dirname, PATH_TO_DB));
+  return fse.remove(resolve(__dirname, "../..", PATH_TO_DB));
 }
