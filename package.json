@@ -2,7 +2,7 @@
   "name": "foxl-db",
   "version": "0.5.1",
   "description": "Simple NoSQL storage",
-  "main": "dist/main.js",
+  "main": "dist/node.js",
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack --hide-modules",
     "start": "cross-env NODE_ENV=development webpack --watch",
@@ -37,6 +37,7 @@
     "eslint-plugin-only-warn": "^1.0.1",
     "jest": "^24.9.0",
     "nodemon-webpack-plugin": "^4.2.1",
+    "terser-webpack-plugin": "^2.2.2",
     "ts-jest": "^24.2.0",
     "ts-loader": "^6.2.1",
     "typescript": "^3.7.2",

@@ -1,4 +1,4 @@
-import { createStorage } from "../src/index";
+import { createStorage } from "../src/node";
 import { INSTANCE_API, PATH_TO_DB } from "./common/constants";
 import { initTest } from "./common/service";
 
