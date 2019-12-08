@@ -2,6 +2,8 @@
 
 Универсальное хранилище для JavaScript-приложений. В браузере состояние сохраняется в localStorage, в Node.js в json-файле.
 
+Две платформы - один API.
+
 ## Установка
 
 ```
@@ -10,21 +12,41 @@ $ npm i foxl-db --save
 
 ## Использование
 
+#### Node.js
+
 ```js
 import { createStorage } from "foxl-db";
 
 const db = createStorage({
-  path: "./db",
-  save: true, // не обязателен, по умолчанию - true
+  path: "./db", // путь до каталога, где будет создан файл с БД (./db/foxldb.json)
   seed: {
-    // не обязателен, по умолчанию - {}
     foo: 42,
     bar: {
       baz: "42"
     }
   }
 });
+```
 
+#### Web
+
+```js
+import { createStorage } from "foxl-db/web";
+
+const db = createStorage({
+  path: "localstorage_key", // ключ в localStorage
+  seed: {
+    foo: 42,
+    bar: {
+      baz: "42"
+    }
+  }
+});
+```
+
+#### Общий API
+
+```js
 // Получение
 const foo = db.get("foo"); // 42
 const bar = db.get("bar"); // { baz: "42" }
@@ -90,7 +112,7 @@ console.log(db.get("foo")); // 43
 db.set("bar", false); // Создаст ключ "bar" со значением false
 console.log(db.get("bar")); // false
 
-db.set("posts", [{ id: 1, title: "Lorem" }]); // Создаст ключ "post" с соответствующим значением
+db.set("posts", [{ id: 1, title: "Lorem" }]); // Создаст ключ "posts" с соответствующим значением
 console.log(db.get("posts")); // [{ id: 1, title: "Lorem" }]
 
 db.set("config.isDev", true); // Не будет создано, т.к родитель "config" не объект
