@@ -3,7 +3,6 @@ export const PATH_TO_DB = "./test/temp";
 
 // instance API
 export const INSTANCE_API = {
-  version: "string",
   get: "function",
   set: "function",
   watch: "function",

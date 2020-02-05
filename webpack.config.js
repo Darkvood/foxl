@@ -1,9 +1,7 @@
-const webpack = require("webpack");
 const TerserPlugin = require("terser-webpack-plugin");
 const merge = require("webpack-merge");
 const NodemonPlugin = require("nodemon-webpack-plugin");
 
-const pkg = require("./package.json");
 const resolve = require("path").resolve;
 
 const mode = process.env.NODE_ENV;
@@ -30,11 +28,7 @@ let nodeConfig = {
       }
     ]
   },
-  plugins: [
-    new webpack.DefinePlugin({
-      FOXL_VERSION: `'${pkg.version}'`
-    })
-  ]
+  plugins: []
 };
 
 // production

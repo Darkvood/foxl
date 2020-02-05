@@ -1,7 +1,7 @@
-import { FoxlDB } from "./app";
+import { createApp } from "./app";
 import { NodeProvider } from "./storage/providers/nodeProvider";
-import { FoxlDBInstance, AppParams } from "../types/app";
+import { AppParams } from "../types/app";
 
-export function createStorage(params: AppParams): FoxlDBInstance {
-  return new FoxlDB(NodeProvider, params);
+export function createStorage(params: AppParams) {
+  return createApp(NodeProvider, params);
 }

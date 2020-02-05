@@ -1,3 +1,4 @@
-import { AppParams, FoxlDBInstance } from "./types/app";
+import { AppParams } from "./types/app";
+import { IStorage } from "./types/storage";
 
-export function createStorage(params: AppParams): FoxlDBInstance;
+export function createStorage(params: AppParams): IStorage;

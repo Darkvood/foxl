@@ -1,14 +1,21 @@
-import { ParsedAppParams, FoxlDBInstance } from "./app";
+import { ParsedAppParams } from "./app";
 
 export interface ProviderFactory {
   new (path: string, seed: any): IStorageProvider;
 }
 
-export interface IStorage extends Omit<FoxlDBInstance, "version"> {
-  init(): void;
+export interface IStorage {
+  get<T>(path: string): T | undefined;
+  set<T>(path: string, value: T): boolean;
+  watch(path: string, handler: FoxlWatchHandler): void;
+  for<T>(path: string): FoxlModel<T>;
+  update<T>(path: string, reducer: FoxlModelReducer<T>): boolean;
+  getState<T>(): T;
+  setState<T>(newState: T): boolean;
 }
 
 export interface IStorageProvider extends Omit<IStorage, "for"> {
+  init(): void;
   save(): void;
 }
 

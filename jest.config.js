@@ -1,5 +1,3 @@
-const pkg = require("./package.json");
-
 module.exports = {
   clearMocks: true,
   coverageDirectory: "coverage",
@@ -10,7 +8,5 @@ module.exports = {
     "^.+\\.tsx?$": "ts-jest"
   },
   testPathIgnorePatterns: ["/node_modules/", "/test/common/"],
-  globals: {
-    FOXL_VERSION: pkg.version
-  }
+  globals: {}
 };
