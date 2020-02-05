@@ -1,20 +1,28 @@
 import { isObject } from "./libs/utils";
 import { AppStorage } from "./storage/appStorage";
 import { AppParams } from "../types/app";
-import { IStorage, ProviderFactory } from "../types/storage";
+import { IStorage, ProviderFactory, StorageParams } from "../types/storage";
 
-export function createApp(provider: ProviderFactory, { path, save = true, seed = {} }: AppParams): IStorage {
-  if (!path && typeof path !== "string") {
-    throw new Error(`[FoxlDB] The params "path" must be non-empty string`);
+export class App {
+  static createStorage(provider: ProviderFactory, params: AppParams): IStorage {
+    const storageParams = App.parseAndValidateParams(params);
+
+    return new AppStorage(provider, storageParams);
   }
 
-  if (typeof save !== "boolean") {
-    throw new Error(`[FoxlDB] The params "save" must be boolean`);
-  }
+  static parseAndValidateParams({ path, save = true, seed = {} }: AppParams): StorageParams | never {
+    if (!path && typeof path !== "string") {
+      throw new Error(`[FoxlDB] The params "path" must be non-empty string`);
+    }
 
-  if (!isObject(seed)) {
-    throw new Error(`[FoxlDB] The params "seed" must be plain object`);
-  }
+    if (typeof save !== "boolean") {
+      throw new Error(`[FoxlDB] The params "save" must be boolean`);
+    }
 
-  return new AppStorage(provider, { path, save, seed });
+    if (!isObject(seed)) {
+      throw new Error(`[FoxlDB] The params "seed" must be plain object`);
+    }
+
+    return { path, save, seed };
+  }
 }
