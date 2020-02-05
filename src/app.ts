@@ -1,5 +1,5 @@
 import { isObject } from "./libs/utils";
-import { AppStorage } from "./storage/appStorage";
+import { AppStorage } from "./storage/app-storage";
 import { AppParams } from "../types/app";
 import { IStorage, ProviderFactory, StorageParams } from "../types/storage";
 

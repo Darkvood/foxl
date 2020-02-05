@@ -1,4 +1,4 @@
-import { BaseProvider } from "./baseProvider";
+import { BaseProvider } from "./base-provider";
 import { IStorageProvider, IState } from "../../../types/storage";
 import { isObject } from "../../libs/utils";
 

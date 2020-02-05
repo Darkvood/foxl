@@ -1,5 +1,5 @@
 import debounce from "lodash.debounce";
-import { BaseProvider } from "./providers/baseProvider";
+import { BaseProvider } from "./providers/base-provider";
 import {
   IStorage,
   IStorageProvider,

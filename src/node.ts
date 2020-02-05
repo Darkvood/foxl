@@ -1,5 +1,5 @@
 import { App } from "./app";
-import { NodeProvider } from "./storage/providers/nodeProvider";
+import { NodeProvider } from "./storage/providers/node-provider";
 import { AppParams } from "../types/app";
 import { IStorage } from "../types/storage";
 

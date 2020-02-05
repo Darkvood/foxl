@@ -1,5 +1,5 @@
 import fse from "fs-extra";
-import { BaseProvider } from "./baseProvider";
+import { BaseProvider } from "./base-provider";
 import { IStorageProvider, IState } from "../../../types/storage";
 
 export class NodeProvider extends BaseProvider implements IStorageProvider {
