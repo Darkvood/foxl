@@ -6,7 +6,7 @@ export function isObject(value: any) {
 
 export function safeGet(obj: any, path: string, defaultValue = noDefault) {
   const result = path.split(".").reduce((acc, curr) => {
-    if (acc && typeof acc === "object" && !Array.isArray(acc) && acc.hasOwnProperty(curr)) {
+    if (acc && typeof acc === "object" && !Array.isArray(acc) && Object.prototype.hasOwnProperty.call(acc, curr)) {
       return acc[curr];
     } else {
       return undefined;
