@@ -15,7 +15,7 @@ export class AppStorage implements IStorage {
   debouncedSave: () => void;
 
   constructor(provider: ProviderFactory, private params: StorageParams) {
-    this.$provider = BaseProvider.factory(provider, params.path, params.seed);
+    this.$provider = BaseProvider.create(provider, params.path, params.seed);
 
     this.debouncedSave = debounce(() => this.save(), 2000);
 

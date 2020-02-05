@@ -52,7 +52,9 @@ export abstract class BaseProvider implements IStorageProvider {
     if (!state) return false;
 
     this.state = state as IState;
-    // TODO: Clear watchers
+
+    this.watchers.clear();
+
     return true;
   }
 
@@ -64,7 +66,7 @@ export abstract class BaseProvider implements IStorageProvider {
     }
   }
 
-  static factory(Provider: ProviderFactory, path: string, seed: any): IStorageProvider {
+  static create(Provider: ProviderFactory, path: string, seed: any): IStorageProvider {
     return new Provider(path, seed);
   }
 }
