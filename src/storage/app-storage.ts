@@ -14,8 +14,8 @@ export class AppStorage implements IStorage {
   $provider: IStorageProvider;
   debouncedSave: () => void;
 
-  constructor(provider: ProviderFactory, private params: StorageParams) {
-    this.$provider = BaseProvider.create(provider, params.path, params.seed);
+  constructor(provider: ProviderFactory, params: StorageParams) {
+    this.$provider = BaseProvider.create(provider, params);
 
     this.debouncedSave = debounce(() => this.save(), 2000);
 
@@ -72,8 +72,6 @@ export class AppStorage implements IStorage {
   }
 
   private save() {
-    if (this.params.save !== true) return;
-
     try {
       this.$provider.save();
     } catch (e) {

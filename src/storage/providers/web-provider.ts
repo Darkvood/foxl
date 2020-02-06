@@ -1,15 +1,15 @@
 import { BaseProvider } from "./base-provider";
-import { IStorageProvider, IState } from "../../../types/storage";
+import { IStorageProvider, IState, StorageParams } from "../../../types/storage";
 import { isObject } from "../../libs/utils";
 
 export class WebProvider extends BaseProvider implements IStorageProvider {
-  constructor(private path: string, private seed: any) {
+  constructor(private params: StorageParams) {
     super();
   }
 
   init(): void {
     let seedRequired = true;
-    const savedData = localStorage.getItem(this.path);
+    const savedData = localStorage.getItem(this.params.path);
 
     if (savedData) {
       let state = JSON.parse(savedData);
@@ -22,14 +22,16 @@ export class WebProvider extends BaseProvider implements IStorageProvider {
     }
 
     if (seedRequired) {
-      this.state = this.seed as IState;
+      this.state = this.params.seed as IState;
       this.save();
     }
 
-    this.seed = null;
+    this.params.seed = null;
   }
 
   save(): void {
-    localStorage.setItem(this.path, JSON.stringify(this.state));
+    if (this.params.save !== true) return;
+
+    localStorage.setItem(this.params.path, JSON.stringify(this.state));
   }
 }

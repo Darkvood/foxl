@@ -1,7 +1,7 @@
 import { ParsedAppParams } from "./app";
 
 export interface ProviderFactory {
-  new (path: string, seed: any): IStorageProvider;
+  new (params: StorageParams): IStorageProvider;
 }
 
 export interface IStorage {

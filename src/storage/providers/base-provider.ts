@@ -6,7 +6,8 @@ import {
   FoxlModelReducer,
   ProviderFactory,
   FoxlWatchersList,
-  FoxlWatchHandler
+  FoxlWatchHandler,
+  StorageParams
 } from "../../../types/storage";
 
 export abstract class BaseProvider implements IStorageProvider {
@@ -66,7 +67,7 @@ export abstract class BaseProvider implements IStorageProvider {
     }
   }
 
-  static create(Provider: ProviderFactory, path: string, seed: any): IStorageProvider {
-    return new Provider(path, seed);
+  static create(Provider: ProviderFactory, params: StorageParams): IStorageProvider {
+    return new Provider(params);
   }
 }

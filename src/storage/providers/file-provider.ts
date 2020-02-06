@@ -1,30 +1,45 @@
 import fse from "fs-extra";
 import { BaseProvider } from "./base-provider";
-import { IStorageProvider, IState } from "../../../types/storage";
+import { IStorageProvider, StorageParams } from "../../../types/storage";
 
 export class FileProvider extends BaseProvider implements IStorageProvider {
   private dataFile: string;
+  private params: StorageParams;
 
-  constructor(private path: string, private seed: any) {
+  constructor(params: StorageParams) {
     super();
-    this.dataFile = this.path;
+
+    this.params = { ...params };
+
+    this.dataFile = this.params.path;
   }
 
   init(): void {
     const isReady = fse.pathExistsSync(this.dataFile);
 
     if (isReady) {
-      this.state = fse.readJsonSync(this.dataFile);
+      this.resotreState();
     } else {
-      fse.removeSync(this.dataFile);
-      this.state = this.seed as IState;
-      this.save();
+      this.seedStorage();
     }
 
-    this.seed = null;
+    this.params.seed = null;
+  }
+
+  resotreState(): void {
+    this.state = fse.readJsonSync(this.dataFile);
+  }
+
+  seedStorage(): void {
+    fse.removeSync(this.dataFile);
+    this.state = this.params.seed;
+
+    this.save();
   }
 
   save(): void {
+    if (this.params.save !== true) return;
+
     fse.outputJsonSync(this.dataFile, this.state);
   }
 }
