@@ -18,7 +18,7 @@ $ npm i foxl-db --save
 import { createStorage } from "foxl-db";
 
 const db = createStorage({
-  path: "./db", // путь до каталога, где будет создан файл с БД (./db/foxldb.json)
+  path: "./db/foxldb.json", // путь до файла json
   seed: {
     foo: 42,
     bar: {

@@ -7,7 +7,7 @@ export class FileProvider extends BaseProvider implements IStorageProvider {
 
   constructor(private path: string, private seed: any) {
     super();
-    this.dataFile = `${this.path}/foxldb.json`;
+    this.dataFile = this.path;
   }
 
   init(): void {
