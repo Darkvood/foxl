@@ -6,12 +6,12 @@ export interface ProviderFactory {
 
 export interface IStorage {
   get<T>(path: string): T | undefined;
-  set<T>(path: string, value: T): boolean;
+  set<T>(path: string, value: T): T | undefined;
   watch(path: string, handler: FoxlWatchHandler): void;
   for<T>(path: string): FoxlModel<T>;
-  update<T>(path: string, reducer: FoxlModelReducer<T>): boolean;
+  update<T>(path: string, reducer: FoxlModelReducer<T>): T | undefined;
   getState<T>(): T;
-  setState<T>(newState: T): boolean;
+  setState<T>(newState: T): T | undefined;
 }
 
 export interface IStorageProvider extends Omit<IStorage, "for"> {
@@ -30,8 +30,8 @@ export type FoxlModelReducer<T> = (el: T | undefined) => any;
 
 export interface FoxlModel<T> {
   get(): T | undefined;
-  set(value: T): boolean;
-  update(reducer: FoxlModelReducer<T>): boolean;
+  set(value: T): T | undefined;
+  update(reducer: FoxlModelReducer<T>): T | undefined;
   watch(handler: FoxlWatchHandler): void;
 }
 

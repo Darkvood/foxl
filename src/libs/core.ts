@@ -15,8 +15,8 @@ export function parentIsMutable(obj: any, path: string): boolean {
   return isObject(parent);
 }
 
-export function commitChanges(state: any, path: string, value: any, changeEmitter: ChangeEmmiter): boolean {
-  if (!path) return false;
+export function commitChanges<T>(state: any, path: string, value: any, changeEmitter: ChangeEmmiter): T | undefined {
+  if (!path) return undefined;
 
   if (Array.isArray(value)) {
     value = [...value];
@@ -30,7 +30,7 @@ export function commitChanges(state: any, path: string, value: any, changeEmitte
 
   changeEmitter(path, value, prevValue);
 
-  return true;
+  return value;
 }
 
 export function parseNextState(newState: any) {

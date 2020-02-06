@@ -22,19 +22,19 @@ export abstract class BaseProvider implements IStorageProvider {
     return safeGet(this.state, path);
   }
 
-  set<T>(path: string, value: T): boolean {
+  set<T>(path: string, value: T): T | undefined {
     if (parentIsMutable(this.state, path)) {
-      return commitChanges(this.state, path, value, this.changeEmitter.bind(this));
+      return commitChanges<T>(this.state, path, value, this.changeEmitter.bind(this));
     }
-    return false;
+    return undefined;
   }
 
   watch(path: string, handler: FoxlWatchHandler): void {
     this.watchers.set(path, handler);
   }
 
-  update<T>(path: string, reducer: FoxlModelReducer<T>): boolean {
-    if (!parentIsMutable(this.state, path)) return false;
+  update<T>(path: string, reducer: FoxlModelReducer<T>): T | undefined {
+    if (!parentIsMutable(this.state, path)) return undefined;
 
     const currentValue = this.get(path);
     const nextValue = reducer(currentValue as T);
@@ -46,16 +46,16 @@ export abstract class BaseProvider implements IStorageProvider {
     return this.state as T;
   }
 
-  setState<T>(newState: T): boolean {
+  setState<T>(newState: T): T | undefined {
     const state = parseNextState(newState);
 
-    if (!state) return false;
+    if (!state) return undefined;
 
     this.state = state as IState;
 
     this.watchers.clear();
 
-    return true;
+    return newState;
   }
 
   changeEmitter(path: string, nextValue: any, prevValue: any): void {

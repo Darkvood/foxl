@@ -34,7 +34,7 @@ export class AppStorage implements IStorage {
     return this.$provider.get<T>(key);
   }
 
-  set<T>(key: string, value: T): boolean {
+  set<T>(key: string, value: T): T | undefined {
     const status = this.$provider.set(key, value);
     this.debouncedSave();
     return status;
@@ -55,7 +55,7 @@ export class AppStorage implements IStorage {
     return $f;
   }
 
-  update<T>(path: string, reducer: FoxlModelReducer<T>): boolean {
+  update<T>(path: string, reducer: FoxlModelReducer<T>): T | undefined {
     const status = this.$provider.update<T>(path, reducer);
     this.debouncedSave();
     return status;
@@ -65,7 +65,7 @@ export class AppStorage implements IStorage {
     return this.$provider.getState<T>();
   }
 
-  setState<T>(newState: T): boolean {
+  setState<T>(newState: T): T | undefined {
     const status = this.$provider.setState<T>(newState);
     this.debouncedSave();
     return status;
