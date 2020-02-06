@@ -10,10 +10,10 @@ const mode = process.env.NODE_ENV;
 let nodeConfig = {
   mode,
   target: "node",
-  entry: resolve(__dirname, "src/node.ts"),
+  entry: resolve(__dirname, "src/file.ts"),
   output: {
     path: resolve(__dirname, "dist"),
-    filename: "node.js",
+    filename: "file.js",
     library: "foxl-db",
     libraryTarget: "umd"
   },
@@ -51,7 +51,7 @@ if (mode === "production") {
 }
 
 // config for web app
-let webConfig = merge.strategy({ entry: "replace", "output.filename": "replace", plugins: "append" })(nodeConfig, {
+let webConfig = merge.strategy({ entry: "replace", "output.filename": "replace" })(nodeConfig, {
   target: "web",
   entry: resolve(__dirname, "src/web.ts"),
   output: {
