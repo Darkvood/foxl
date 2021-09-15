@@ -23,7 +23,7 @@
   "dependencies": {
     "fs-extra": "^8.1.0",
     "lodash.debounce": "^4.0.8",
-    "set-value": "^3.0.1"
+    "set-value": "^4.0.1"
   },
   "devDependencies": {
     "@types/fs-extra": "^8.0.1",
