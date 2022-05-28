@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/Darkvood/foxl-db#readme",
   "dependencies": {
-    "fs-extra": "^8.1.0",
+    "fs-extra": "^9.0.0",
     "lodash.debounce": "^4.0.8",
     "set-value": "^3.0.1"
   },
